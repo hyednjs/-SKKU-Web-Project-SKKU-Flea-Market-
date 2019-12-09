@@ -28,6 +28,7 @@ function Login() {
   return (
     <div class="login-page">
       <img class="logo-img" src="img/flea_market.png" />
+
       <div class="form">
 
         <form class="register-form">

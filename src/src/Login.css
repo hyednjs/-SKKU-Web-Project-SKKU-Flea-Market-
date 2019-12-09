@@ -9,11 +9,11 @@
   margin: auto;
 }
 .logo-img{
-  background: #e7e6e6;
-  width: 400px;
-  height: 100px;
-  margin-left: 245px;
+  width: 500px;
+  display: block;
+  margin: auto;
 }
+
 .logo-img-in-request{
   width: 200px;
   height: 70px;
