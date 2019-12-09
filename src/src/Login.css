@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  width: 360px;
   padding: 4% 0 0;
   margin: auto;
 }
@@ -11,9 +10,9 @@
 }
 .logo-img{
   background: #e7e6e6;
-  width: 200px;
-  height: 90px;
-  margin-left: 80px;
+  width: 400px;
+  height: 100px;
+  margin-left: 245px;
 }
 .logo-img-in-request{
   width: 200px;
