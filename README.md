@@ -1,1 +1,1 @@
-# -SKKU-Web-Project-SKKU-Flea-Market-
+# SKKU WEB PROJECT - Flea Market
