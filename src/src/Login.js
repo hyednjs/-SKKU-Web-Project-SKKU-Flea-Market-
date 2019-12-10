@@ -25,6 +25,16 @@ function Login() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
+  function selectOnlyThis(event) {
+    const selected = event.target.checked;
+    const selected_name = event.target.id;
+    if (selected_name === "seller1") document.getElementById("buyer1").checked = false;
+    if (selected_name === "buyer1") document.getElementById("seller1").checked = false;
+    if (selected_name === "seller2") document.getElementById("buyer2").checked = false;
+    if (selected_name === "buyer2") document.getElementById("seller2").checked = false;
+
+  }
+
   return (
     <div class="login-page">
       <img class="logo-img" src="img/flea_market.png" />
@@ -34,12 +44,14 @@ function Login() {
         <form class="register-form">
           <h2>REGISTER</h2>
 
-          <input type="checkbox" id="seller2" /><label for="seller2">Seller</label>
-          <input type="checkbox" id="buyer2" /><label for="buyer2">Buyer</label>
+          <input type="checkbox" id="seller2" onChange={selectOnlyThis} />
+          <label for="seller2">Seller</label>
+          <input type="checkbox" id="buyer2" onChange={selectOnlyThis} />
+          <label for="buyer2">Buyer</label>
 
-          <input type="text" placeholder="name" name="id" required onChange={(e) => setID(e.target.value)} />
-          <input type="password" placeholder="password" name="password" required onChange={(e) => setPassword(e.target.value)} />
-          <input type="text" placeholder="email address" name="email" required onChange={(e) => setEmail(e.target.value)} />
+          <input type="text" placeholder="name" name="id" onChange={(e) => setID(e.target.value)} />
+          <input type="password" placeholder="password" name="password" onChange={(e) => setPassword(e.target.value)} />
+          <input type="text" placeholder="email address" name="email" onChange={(e) => setEmail(e.target.value)} />
           <button class="create-btn" type="reset">create</button>
           <HelpMessage msg="Already registered? " detail="Sign In" />
         </form>
@@ -47,8 +59,10 @@ function Login() {
         <form class="login-form">
           <h2>LOGIN</h2>
 
-          <input type="checkbox" id="seller1" /><label for="seller1">Seller</label>
-          <input type="checkbox" id="buyer1" /><label for="buyer1">Buyer</label>
+          <input type="checkbox" id="seller1" onChange={selectOnlyThis} />
+          <label for="seller1">Seller</label>
+          <input type="checkbox" id="buyer1" onChange={selectOnlyThis} />
+          <label for="buyer1">Buyer</label>
 
           <input type="text" placeholder="username" onChange={(e) => setID(e.target.value)} />
           <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
