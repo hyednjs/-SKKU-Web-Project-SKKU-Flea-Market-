@@ -34,8 +34,8 @@ function Login() {
         <form class="register-form">
           <h2>REGISTER</h2>
 
-          <input type="checkbox" id="seller2" /><label for="seller2">Seller</label>
-          <input type="checkbox" id="buyer2" /><label for="buyer2">Buyer</label>
+          <input type="checkbox" id="seller2" /><label for="seller2" name="cb">Seller</label>
+          <input type="checkbox" id="buyer2" /><label for="buyer2" name="cb">Buyer</label>
 
           <input type="text" placeholder="name" name="id" required onChange={(e) => setID(e.target.value)} />
           <input type="password" placeholder="password" name="password" required onChange={(e) => setPassword(e.target.value)} />
@@ -47,8 +47,8 @@ function Login() {
         <form class="login-form">
           <h2>LOGIN</h2>
 
-          <input type="checkbox" id="seller1" /><label for="seller1">Seller</label>
-          <input type="checkbox" id="buyer1" /><label for="buyer1">Buyer</label>
+          <input type="checkbox" id="seller1" /><label for="seller1" name="cb">Seller</label>
+          <input type="checkbox" id="buyer1" /><label for="buyer1" name="cb">Buyer</label>
 
           <input type="text" placeholder="username" onChange={(e) => setID(e.target.value)} />
           <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
