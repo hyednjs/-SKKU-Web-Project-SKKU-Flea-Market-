@@ -75,8 +75,9 @@
 
       <div class="row justify-content-center">
         <div class="col-md-4 col-lg-3 mb-4 mb-md-0">
-          <div class="img-upload">
-            <p>Drop and drop file here or Click here to browse file</p>
+          <input id="upload-file" name="upload-file" type="file" style="display: none;">
+          <div class="img-upload" id="img-upload">
+            <p id="upload-text">Click here to browse your product image file.</p>
           </div>
         </div>
         <div class="col-md-8 col-lg-6">
@@ -96,11 +97,11 @@
                   <input class="form-control" type="text" placeholder="Enter Your Phone Number">
                 </div>
                 <div class="custom-control custom-checkbox mr-sm-2">
-                  <input type="checkbox" class="custom-control-input" id="flea-market">
+                  <input type="checkbox" class="custom-control-input" id="flea-market" onclick="checkOnlyOne(this);">
                   <label class="custom-control-label" for="flea-market">Flea Market</label>
                 </div>
                 <div class="custom-control custom-checkbox mr-sm-2">
-                  <input type="checkbox" class="custom-control-input" id="auction">
+                  <input type="checkbox" class="custom-control-input" id="auction" onclick="checkOnlyOne(this);">
                   <label class="custom-control-label" for="auction">Auction</label>
                 </div>
               </div>
@@ -150,6 +151,21 @@
         $('form p').text(this.files.length + " file(s) selected");
       });
     });
+
+    $('#img-upload').on('click', function () {
+      $('#upload-file').trigger('click');
+    });
+
+    document.getElementById("upload-file").onchange = function () {
+      var filename = this.value.split(/(\\|\/)/g).pop();
+      document.getElementById("upload-text").innerHTML = filename;
+    }
+
+    function checkOnlyOne(obj) {
+      var chk = document.getElementById("flea-market");
+      if (chk == obj) document.getElementById("auction").checked = false;
+      else document.getElementById("flea-market").checked = false;
+    }
   </script>
   <!--===============================================================================================-->
 
