@@ -171,7 +171,7 @@
 			.then(function (doc) {
 				if (doc.exists) {
 					document.getElementById("item_name").textContent = doc.data().pname;
-					document.getElementById("item_price").textContent = doc.data().price + " won";
+					document.getElementById("item_price").textContent = doc.data().price[doc.data().price.length - 1] + " won";
 					document.getElementById("seller_name").textContent = doc.data().seller;
 					document.getElementById("phone_number").textContent = doc.data().phonenum;
 					document.getElementById("trading_place").textContent = doc.data().tradingplace;
