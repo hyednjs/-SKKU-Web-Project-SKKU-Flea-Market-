@@ -85,16 +85,19 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="Enter Product Name">
+                  <input class="form-control" type="text" id="pname" placeholder="Enter Product Name">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="Enter Product Price">
+                  <input class="form-control" type="text" id="price" placeholder="Enter Product Price">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="Enter Your Name">
+                  <input class="form-control" type="text" id="seller" placeholder="Enter Your Name">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="Enter Your Phone Number">
+                  <input class="form-control" type="text" id="phonenum" placeholder="Enter Your Phone Number">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="tradingplace" placeholder="Enter Trading place">
                 </div>
                 <div class="custom-control custom-checkbox mr-sm-2">
                   <input type="checkbox" class="custom-control-input" id="flea-market" onclick="checkOnlyOne(this);">
@@ -108,8 +111,7 @@
 
             </div>
             <div class="form-group text-center text-md-right mt-3">
-              <button type="submit" class="button button--active button-contactForm"
-                onClick="location.href='category.html'">
+              <button type="reset" class="button button--active button-contactForm" onclick="writeProductData()">
                 Register Product
               </button>
             </div>
@@ -168,6 +170,64 @@
       else document.getElementById("flea-market").checked = false;
     }
   </script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-firestore.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCfplFv26jJI7FF5jPWHaQE8fMtm0pSNSA",
+      authDomain: "skku-flea-market.firebaseapp.com",
+      projectId: "skku-flea-market",
+      appId: "1:496880200582:web:34045356203e3d8d1e5a07"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+  </script>
+
+  <script>
+
+    var db = firebase.firestore();
+
+    function writeProductData() {
+
+      //pname, phonenum, price, seller,type
+      var pname = document.getElementById("pname").value;
+      var phonenum = document.getElementById("phonenum").value;
+      var price = document.getElementById("price").value;
+      var seller = document.getElementById("seller").value;
+      var tradingplace = document.getElementById("tradingplace").value;
+      var type = null;
+      if (document.getElementById("auction").checked) type = "auction";
+      else if (document.getElementById("flea-market").checked) type = "fleamarket";
+
+      if (pname == "" || phonenum == "" || price == "" || seller == "" || type == "") {
+        alert("Fill in the all blank.");
+        return;
+      }
+      else {
+        db.collection("product").add({
+          pname: pname,
+          phonenum: phonenum,
+          price: price,
+          seller: seller,
+          tradingplace: tradingplace,
+          type: type
+        })
+          .then(function () {
+            console.log("Document successfully written!");
+            console.log(pname, phonenum, price, seller, tradingplace, type);
+            alert("Success to create your account!");
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+      }
+    }
+  </script>
+
   <!--===============================================================================================-->
 
 </body>
