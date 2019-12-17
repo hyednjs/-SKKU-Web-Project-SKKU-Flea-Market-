@@ -77,23 +77,26 @@
 							<div class="col-md-12 form-group">
 								<input type="text" class="form-control" id="name" name="name" placeholder="ID"
 									onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'">
-								<button>Duplicate</button>
+								<button type="button" onclick="checkid()">Duplicate</button>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="email" name="email" placeholder="Email Address"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
+								<input type="text" class="form-control" id="email" name="email"
+									placeholder="Email Address" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Email Address'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="password" name="password" placeholder="Password"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input type="password" class="form-control" id="password" name="password"
+									placeholder="Password" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Password'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="confirmPassword" name="confirmPassword"
+								<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
 									placeholder="Confirm Password" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'Confirm Password'">
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-register w-100">Register</button>
+								<button type="reset" onclick="writeUserData()"
+									class="button button-register w-100">Register</button>
 							</div>
 						</form>
 					</div>
@@ -137,6 +140,96 @@
 			if (chk == obj) document.getElementById("buyer").checked = false;
 			else document.getElementById("seller").checked = false;
 		}
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-firestore.js"></script>
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyCfplFv26jJI7FF5jPWHaQE8fMtm0pSNSA",
+			authDomain: "skku-flea-market.firebaseapp.com",
+			projectId: "skku-flea-market",
+			appId: "1:496880200582:web:34045356203e3d8d1e5a07"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+
+	</script>
+
+	<script>
+
+		var db = firebase.firestore();
+		function checkid() {
+
+			var usertype = null;
+			if (document.getElementById("seller").checked) usertype = "seller";
+			else if (document.getElementById("buyer").checked) usertype = "buyer";
+
+			var name = document.getElementById("name").value;
+			db.collection("user").where("user_id", "==", name).where("user_type", "==", usertype)
+				.get()
+				.then(function (qs) {
+					if (!qs.empty) {
+						qs.forEach(function (doc) {
+							alert("id already exists!");
+							document.getElementById("name").value = "";
+						});
+					}
+					else {
+						alert("ok");
+					}
+
+				})
+
+		}
+
+
+
+
+		function writeUserData() {
+
+
+			var usertype = null;
+			if (document.getElementById("seller").checked) usertype = "seller";
+			else if (document.getElementById("buyer").checked) usertype = "buyer";
+
+			//name, email, password, confirmPassword
+
+			var name = document.getElementById("name").value;
+			var email = document.getElementById("email").value;
+			var password = document.getElementById("password").value;
+			var confirmPassword = document.getElementById("confirmPassword").value;
+
+			console.log(name, email, password, confirmPassword);
+			if (password != confirmPassword) {
+				alert("password is not equal to passwordconfirm");
+			}
+			else {
+				// Add a new document in collection "cities"
+				db.collection("user").add({
+					user_id: name,
+					email: email,
+					user_pw: password,
+					user_type: usertype
+				})
+					.then(function () {
+						console.log("Document successfully written!");
+					})
+					.catch(function (error) {
+						console.error("Error writing document: ", error);
+					});
+			}
+
+
+
+		}
+
+
+
+
+
+
 	</script>
 </body>
 
