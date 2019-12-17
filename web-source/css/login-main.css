@@ -75,10 +75,11 @@ textarea:focus, input:focus {
 button {
 	outline: none !important;
 	border: none;
-  background: white;
-  border: 1.5px solid black;
-  border-radius: 25px;
-  padding: 3px;
+	background: white;
+	border: 1.5px solid black;
+	border-radius: 25px;
+	padding: 3px;
+	cursor: pointer;
 }
 
 button:hover {

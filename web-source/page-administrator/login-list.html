@@ -65,48 +65,36 @@
             <table>
               <thead>
                 <tr class="row100 head">
-                  <th class="cell100 column1">Student ID</th>
+                  <th class="cell100 column1">Student ID(Name)</th>
                   <th class="cell100 column2">Password</th>
-                  <th class="cell100 column3">Name</th>
+                  <th class="cell100 column3">E-mail</th>
                   <th class="cell100 column4">Buyer/Seller</th>
                   <th class="cell100 column5">Delete</th>
                 </tr>
-
               </thead>
             </table>
           </div>
 
           <div class="table100-body js-pscroll">
             <table>
-              <tbody>
-                <tr class="row100 body">
-                  <td class="cell100 column1" contenteditable="true">20151111</td>
-                  <td class="cell100 column2" contenteditable="true">12345</td>
-                  <td class="cell100 column3" contenteditable="true">Ju Hyewon</td>
-                  <td class="cell100 column4" contenteditable="true">Buyer</td>
-                  <td class="cell100 column5"><button onClick="deleteRow(this)">Delete</button></td>
-                </tr>
-                <tr class="row100 body">
-                  <td class="cell100 column1" contenteditable="true">20151112</td>
-                  <td class="cell100 column2" contenteditable="true">12345</td>
-                  <td class="cell100 column3" contenteditable="true">Ju Hyewon</td>
-                  <td class="cell100 column4" contenteditable="true">Buyer</td>
-                  <td class="cell100 column5"><button onClick="deleteRow(this)">Delete</button></td>
-                </tr>
-                <tr class="row100 body">
-                  <td class="cell100 column1" contenteditable="true">20151113</td>
-                  <td class="cell100 column2" contenteditable="true">12345</td>
-                  <td class="cell100 column3" contenteditable="true">Ju Hyewon</td>
-                  <td class="cell100 column4" contenteditable="true">Buyer</td>
-                  <td class="cell100 column5"><button onClick="deleteRow(this)">Delete</button></td>
-                </tr>
-
-
+              <tbody id="login-list-body">
+                <template id="login-list-row">
+                  <tr class="row100 body">
+                    <td class="cell100 column1" contenteditable="true"></td>
+                    <td class="cell100 column2" contenteditable="true"></td>
+                    <td class="cell100 column3" contenteditable="true"></td>
+                    <td class="cell100 column4" contenteditable="true"></td>
+                    <td class="cell100 column5"><button type="button" onClick="deleteRow(this)">Delete</button></td>
+                  </tr>
+                </template>
               </tbody>
             </table>
           </div>
         </div>
       </div>
+    </div>
+    <div class="form-group text-center text-md-right">
+      <button class="button button--active button-contactForm" onClick="saveInfo()">Save</button>
     </div>
   </div>
 
@@ -136,15 +124,76 @@
         ps.update();
       })
     });
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCfplFv26jJI7FF5jPWHaQE8fMtm0pSNSA",
+      authDomain: "skku-flea-market.firebaseapp.com",
+      projectId: "skku-flea-market",
+      appId: "1:496880200582:web:34045356203e3d8d1e5a07"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script>
+
+    var db = firebase.firestore();
+    var docList = [];
+
+    db.collection("user")
+      .get()
+      .then(function (qs) {
+        docList = qs.docs;
+        qs.forEach(function (doc) {
+          var target = document.getElementById('login-list-row');
+          var clone = document.importNode(target.content, true);
+          var tb = document.querySelector("tbody");
+          td = clone.querySelectorAll("td");
+          td[0].textContent = doc.data().user_id;
+          td[1].textContent = doc.data().user_pw;
+          td[2].textContent = doc.data().email;
+          td[3].textContent = doc.data().user_type;
+          tb.appendChild(clone);
+        })
+      })
 
     function deleteRow(obj) {
-      var tr = $(obj).parent().parent();
-      tr.remove();
+      if (confirm('지우시겠습니까?')) {
+        var tr = $(obj).parent().parent();
+        var row_idx = obj.parentElement.parentElement.rowIndex;
+        docList[row_idx].ref.delete()
+          .then(function () {
+            tr.remove();
+            if (row_idx > -1) {
+              docList.splice(row_idx, 1);
+            }
+          });
+      }
     }
+
+    function saveInfo() {
+      var table = document.getElementById("login-list-body");
+
+      for (var i = 0; i < docList.length; i++) {
+        docList[i].ref.set({
+          user_id: table.querySelectorAll("tr")[i].querySelectorAll("td")[0].textContent,
+          user_pw: table.querySelectorAll("tr")[i].querySelectorAll("td")[1].textContent,
+          email: table.querySelectorAll("tr")[i].querySelectorAll("td")[2].textContent,
+          user_type: table.querySelectorAll("tr")[i].querySelectorAll("td")[3].textContent
+        })
+          .then(function () {
+          })
+      }
+    }
+
   </script>
   <!--===============================================================================================-->
-
-
 </body>
 
 </html>
