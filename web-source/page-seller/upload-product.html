@@ -104,8 +104,13 @@
                   <label class="custom-control-label" for="flea-market">Flea Market</label>
                 </div>
                 <div class="custom-control custom-checkbox mr-sm-2">
-                  <input type="checkbox" class="custom-control-input" id="auction" onclick="checkOnlyOne(this);">
+                  <input type="checkbox" class="custom-control-input" id="auction" onclick="checkOnlyOne(this);"
+                    onChange="checkAuction(this)">
                   <label class="custom-control-label" for="auction">Auction</label>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="datetime-local" style="visibility: hidden;" id="remaintime"
+                    placeholder="Enter Remaining Time" value="null">
                 </div>
               </div>
 
@@ -166,8 +171,39 @@
 
     function checkOnlyOne(obj) {
       var chk = document.getElementById("flea-market");
-      if (chk == obj) document.getElementById("auction").checked = false;
-      else document.getElementById("flea-market").checked = false;
+      if (chk == obj) {//flea
+        document.getElementById("auction").checked = false;
+        document.getElementById("remaintime").setAttribute("style", "visibility:hidden");
+      }
+      else { // auction
+        document.getElementById("flea-market").checked = false;
+      }
+    }
+    /*
+    function checkOnlyOneAutction(obj) {
+      var chk = document.getElementById("flea-market");
+      var chka = document.getElementById("auction");
+
+      document.getElementById("remaintime").setAttribute("type", "hidden");
+      if (chk == obj) { // flea
+        document.getElementById("auction").checked = false;
+        document.getElementById("remaintime").setAttribute("type", "none");
+      }
+
+      else {// 
+        document.getElementById("flea-market").checked = false;
+        document.getElementById("remaintime").setAttribute("type", "display");
+      }
+      if (document.getElementById("auction").unchecked) {
+        document.getElementById("remaintime").setAttribute("type", "none");
+      }
+      
+  
+    }
+    */
+    function checkAuction(obj) {
+      if (obj.checked) document.getElementById("remaintime").setAttribute("style", "visibility:visible");
+      else document.getElementById("remaintime").setAttribute("style", "visibility:hidden");
     }
   </script>
 
@@ -199,8 +235,15 @@
       var price = document.getElementById("price").value;
       var seller = document.getElementById("seller").value;
       var tradingplace = document.getElementById("tradingplace").value;
+      var remaintime = document.getElementById("remaintime").value;
       var type = null;
-      if (document.getElementById("auction").checked) type = "auction";
+      var status = "selling";
+      if (document.getElementById("auction").checked) {
+        type = "auction";
+
+
+      }
+
       else if (document.getElementById("flea-market").checked) type = "fleamarket";
 
       if (pname == "" || phonenum == "" || price == "" || seller == "" || type == "") {
@@ -214,9 +257,13 @@
           price: price,
           seller: seller,
           tradingplace: tradingplace,
-          type: type
+          type: type,
+          remaintime: firebase.firestore.Timestamp.fromDate(new Date(remaintime)),
+          status: status
         })
           .then(function () {
+            console.log(remaintime);
+            console.log(remaintime.toISOString);
             console.log("Document successfully written!");
             console.log(pname, phonenum, price, seller, tradingplace, type);
             alert("Success to create your account!");

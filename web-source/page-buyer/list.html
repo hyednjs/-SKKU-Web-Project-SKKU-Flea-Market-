@@ -28,8 +28,9 @@
 				<div class="container">
 					<a class="navbar-brand logo_h" href="index.html"><img src="../img/logo.png" alt=""></a>
 					<h6>___for Buyer</h6>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -75,7 +76,7 @@
 	<div class="container-table100">
 		<div class="wrap-table100">
 			<div class="table100">
-				<table>
+				<table id="list">
 					<thead>
 						<tr class="table100-head">
 							<th class="column1">Product Name</th>
@@ -87,15 +88,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="column1">Desktop</td>
-							<td class="column2">1500000</td>
-							<td class="column3">suwon</td>
-							<td class="column4">010-1111-2222</td>
-							<td class="column5">Selling</td>
-							<td class="column6">Tom</td>
-						</tr>
-
+						<template id="list-row">
+							<tr onClick="clickRow(this)">
+								<td class="column1"></td>
+								<td class="column2"></td>
+								<td class="column3"></td>
+								<td class="column4"></td>
+								<td class="column5"></td>
+								<td class="column6"></td>
+							</tr>
+						</template>
 					</tbody>
 				</table>
 			</div>
@@ -132,6 +134,64 @@
 	<script src="../vendors/mail-script.js"></script>
 	<script src="../js/main.js"></script>
 	<!--===============================================================================================-->
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-firestore.js"></script>
+
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyCfplFv26jJI7FF5jPWHaQE8fMtm0pSNSA",
+			authDomain: "skku-flea-market.firebaseapp.com",
+			projectId: "skku-flea-market",
+			appId: "1:496880200582:web:34045356203e3d8d1e5a07"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script>
+
+		var db = firebase.firestore();
+		var docList = [];
+
+		db.collection("product")
+			.get()
+			.then(function (qs) {
+				docList = qs.docs;
+				qs.forEach(function (doc) {
+					var target = document.getElementById('list-row');
+					var clone = document.importNode(target.content, true);
+					var tb = document.querySelector("tbody");
+					td = clone.querySelectorAll("td");
+					//console.log(doc.data());
+					td[0].textContent = doc.data().pname;
+					td[1].textContent = doc.data().price;
+					td[2].textContent = doc.data().tradingplace;
+					td[3].textContent = doc.data().phonenum;
+					td[4].textContent = doc.data().status;
+					td[5].textContent = doc.data().seller;
+
+					var type = doc.data().type;
+
+					tb.appendChild(clone);
+				})
+			})
+
+		function clickRow(obj) {
+
+			var row_idx = obj.rowIndex;
+			console.log(docList[row_idx].id);
+
+			window.location.href = "../page-buyer/single-product.html?id=" + docList[row_idx].id;
+
+		}
+
+
+
+
+
+	</script>
+
 </body>
 
 </html>
