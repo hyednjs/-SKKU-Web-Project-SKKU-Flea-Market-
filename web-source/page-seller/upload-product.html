@@ -179,28 +179,7 @@
         document.getElementById("flea-market").checked = false;
       }
     }
-    /*
-    function checkOnlyOneAutction(obj) {
-      var chk = document.getElementById("flea-market");
-      var chka = document.getElementById("auction");
 
-      document.getElementById("remaintime").setAttribute("type", "hidden");
-      if (chk == obj) { // flea
-        document.getElementById("auction").checked = false;
-        document.getElementById("remaintime").setAttribute("type", "none");
-      }
-
-      else {// 
-        document.getElementById("flea-market").checked = false;
-        document.getElementById("remaintime").setAttribute("type", "display");
-      }
-      if (document.getElementById("auction").unchecked) {
-        document.getElementById("remaintime").setAttribute("type", "none");
-      }
-      
-  
-    }
-    */
     function checkAuction(obj) {
       if (obj.checked) document.getElementById("remaintime").setAttribute("style", "visibility:visible");
       else document.getElementById("remaintime").setAttribute("style", "visibility:hidden");
@@ -240,8 +219,6 @@
       var status = "selling";
       if (document.getElementById("auction").checked) {
         type = "auction";
-
-
       }
 
       else if (document.getElementById("flea-market").checked) type = "fleamarket";
@@ -254,10 +231,11 @@
         db.collection("product").add({
           pname: pname,
           phonenum: phonenum,
-          price: parseInt(price),
+          price: [parseInt(price)],
           seller: seller,
           tradingplace: tradingplace,
           type: type,
+          buyer: [],
           remaintime: firebase.firestore.Timestamp.fromDate(new Date(remaintime)),
           status: status
         })

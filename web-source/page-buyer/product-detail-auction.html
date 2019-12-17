@@ -109,11 +109,16 @@
 							<h4 id="trading_place"></h4>
 						</div>
 						<div>
+							<input type="text" id="buyer-name" name="buyer-name" placeholder="your name"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'your name'">
+						</div>
+						<div>
 							<input type="text" id="new-price" name="new-price" placeholder="new price"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = 'new price'">
 							<button type="reset" onClick="clickBid()">BID!</button>
 						</div>
 					</div>
+
 					<div class="product_count">
 						<a class="button primary-btn" href="#">Add to Cart</a>
 						<a class="button primary-btn" href="#">Buy</a>
@@ -203,11 +208,11 @@
 			}, 1000);
 		}
 
-		var item_id = getURLParameter("id");
+		// var item_id = getURLParameter("id");
 		var db = firebase.firestore();
 		var docList = [];
 
-		db.collection("product").doc(item_id)
+		db.collection("product").doc("Oq4KkZKXHP8Qd8CnOo4h")
 			.get()
 			.then(function (doc) {
 				if (doc.exists) {
@@ -225,7 +230,11 @@
 
 		function clickBid() {
 			var new_price = parseInt(document.getElementById("new-price").value);
-			document.getElementById("new-price").value = ""
+			var buyer = document.getElementById("buyer-name").value;
+
+			document.getElementById("new-price").value = "";
+			document.getElementById("buyer-name").value = "";
+
 			if (parseInt(document.getElementById("item_price").textContent) >= new_price) {
 				alert("Please enter a higher price.");
 				return;
@@ -233,7 +242,8 @@
 			document.getElementById("item_price").textContent = new_price;
 			db.collection("product").doc("Oq4KkZKXHP8Qd8CnOo4h")
 				.update({
-					price: firebase.firestore.FieldValue.arrayUnion(new_price)
+					price: firebase.firestore.FieldValue.arrayUnion(new_price),
+					history: firebase.firestore.FieldValue.arrayUnion({ buyer_name: buyer, price: new_price })
 				});
 			alert("Success bid!")
 		}
