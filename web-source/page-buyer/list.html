@@ -4,7 +4,7 @@
 <head>
 	<title>SKKU Flea Market</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="../img/Favicon.png" type="image/png">
 	<link rel="stylesheet" type="text/css" href="../css/util.css">
 	<link rel="stylesheet" type="text/css" href="../css/list.css">
@@ -72,64 +72,100 @@
 		</div>
 	</section>
 	<!-- ================ end banner area ================= -->
+	<!-- Start Filter Bar -->
+	<section class="section-margin--small mb-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12 col-lg-10 col-md-8">
+					<div class="filter-bar d-flex flex-wrap align-items-center">
 
-	<div class="container-table100">
-		<div class="wrap-table100">
-			<div class="table100">
-				<table id="list">
-					<thead>
-						<tr class="table100-head">
-							<th class="column1">Product Name</th>
-							<th class="column2">Current Price</th>
-							<th class="column3">Trading Place</th>
-							<th class="column4">Phone Number</th>
-							<th class="column5">Status</th>
-							<th class="column6">Seller Name</th>
-						</tr>
-					</thead>
-					<tbody>
-						<template id="list-row">
-							<tr onClick="clickRow(this)">
-								<td class="column1"></td>
-								<td class="column2"></td>
-								<td class="column3"></td>
-								<td class="column4"></td>
-								<td class="column5"></td>
-								<td class="column6"></td>
-							</tr>
-						</template>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+						<div class="common-filter">
+							<div class="head">Search by Price</div>
+							<div class="price-range-area">
+								<div id="price-range"></div>
+								<div class="value-wrapper d-flex">
+									<div class="price">Price: </div>
+									<input type="text" id="min_price" value="0">
+									<div id="lower-value" onchanged="alert('helo')"></div>
+									<div class="to">to</div>
+									<input type="text" id="max_price" value="999999">
+									<div id="upper-value"></div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="input-group filter-bar-search">
+								<!--input type="text" placeholder="Search"-->
+								<!--div class="input-group-append"-->
+								<button type="button" id="search" onClick="search(this)"><i
+										class="ti-search"></i></button>
+								<!--/div>-->
+							</div>
+						</div>
+					</div>
+					<!-- End Filter Bar -->
+					<div class="container-table100">
+						<div class="wrap-table100">
+							<div class="table100">
+								<table id="list">
+									<thead>
+										<tr class="table100-head">
+											<th class="column1">Product Name</th>
+											<th class="column2">Current Price</th>
+											<th class="column3">Trading Place</th>
+											<th class="column4">Phone Number</th>
+											<th class="column5">Status</th>
+											<th class="column6">Seller Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										<template id="list-row">
+											<tr onClick="clickRow(this)">
+												<td class="column1"></td>
+												<td class="column2"></td>
+												<td class="column3"></td>
+												<td class="column4"></td>
+												<td class="column5"></td>
+												<td class="column6"></td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
 
 
-	<!--================ Start footer Area  =================-->
-	<footer>
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row d-flex">
-					<p class="col-lg-12 footer-text text-center">
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script>
-						<i class="fa fa-heart" aria-hidden="true"></i> by Choi Ji Hye & Ju Hye Won
-					</p>
+					<!--================ Start footer Area  =================-->
+					<footer>
+						<div class="footer-bottom">
+							<div class="container">
+								<div class="row d-flex">
+									<p class="col-lg-12 footer-text text-center">
+										Copyright &copy;
+										<script>document.write(new Date().getFullYear());</script>
+										<i class="fa fa-heart" aria-hidden="true"></i> by Choi Ji Hye & Ju Hye Won
+									</p>
+								</div>
+							</div>
+						</div>
+					</footer>
+					<!--================ End footer Area  =================-->
 				</div>
 			</div>
 		</div>
-	</footer>
-	<!--================ End footer Area  =================-->
-
+	</section>
 
 
 	<!--===============================================================================================-->
+
 	<script src="../vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="../vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="../vendors/skrollr.min.js"></script>
 	<script src="../vendors/owl-carousel/owl.carousel.min.js"></script>
 	<script src="../vendors/nice-select/jquery.nice-select.min.js"></script>
+	<!--script src="../vendors/nouislider/nouislider.min.js"></!--script-->
 	<script src="../vendors/jquery.ajaxchimp.min.js"></script>
 	<script src="../vendors/mail-script.js"></script>
 	<script src="../js/main.js"></script>
@@ -179,12 +215,64 @@
 
 		function clickRow(obj) {
 
-			var row_idx = obj.rowIndex;
+			var row_idx = obj.rowIndex - 1;
 			console.log(docList[row_idx].id);
 
 			window.location.href = "../page-buyer/single-product.html?id=" + docList[row_idx].id;
 
+
 		}
+		function search(obj) {
+			var table = document.getElementById("list");
+			//or use :  var table = document.all.tableid;
+			for (var i = table.rows.length - 1; i > 0; i--) {
+				table.deleteRow(i);
+			}
+
+			var docList = [];
+
+
+			var min = document.getElementById("min_price").value;
+
+			var max = document.getElementById("max_price").value;
+
+
+
+
+			db.collection("product")
+				.where("price", "<=", parseInt(max))
+				.where("price", ">=", parseInt(min))
+				.orderBy("price")
+				.get()
+				.then(function (qs) {
+					docList = qs.docs;
+
+					qs.forEach(function (doc) {
+						var target = document.getElementById('list-row');
+						var clone = document.importNode(target.content, true);
+						var tb = document.querySelector("tbody");
+						td = clone.querySelectorAll("td");
+						console.log(doc.data().price);
+						td[0].textContent = doc.data().pname;
+						td[1].textContent = doc.data().price;
+						td[2].textContent = doc.data().tradingplace;
+						td[3].textContent = doc.data().phonenum;
+						td[4].textContent = doc.data().status;
+						td[5].textContent = doc.data().seller;
+
+						var type = doc.data().type;
+
+						tb.appendChild(clone);
+					})
+
+				})
+
+
+
+
+		}
+
+
 
 
 

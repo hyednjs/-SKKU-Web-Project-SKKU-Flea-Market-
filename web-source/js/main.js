@@ -86,7 +86,7 @@ $(function () {
 
     var nonLinearSlider = document.getElementById('price-range');
 
-    noUiSlider.create(nonLinearSlider, {
+    /*noUiSlider.create(nonLinearSlider, {
       connect: true,
       behaviour: 'tap',
       start: [500, 4000],
@@ -99,7 +99,7 @@ $(function () {
         'max': [10000]
       }
     });
-
+*/
 
     var nodes = [
       document.getElementById('lower-value'), // 0
@@ -108,9 +108,9 @@ $(function () {
 
     // Display the slider value and how far the handle moved
     // from the left edge of the slider.
-    nonLinearSlider.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
-      nodes[handle].innerHTML = values[handle];
-    });
+    //nonLinearSlider.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
+    //  nodes[handle].innerHTML = values[handle];
+    //});
 
   }
 });
