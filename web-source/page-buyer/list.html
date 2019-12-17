@@ -179,10 +179,8 @@
 
 		function clickRow(obj) {
 
-			var row_idx = obj.rowIndex;
-			console.log(docList[row_idx].id);
-
-			window.location.href = "../page-buyer/single-product.html?id=" + docList[row_idx].id;
+			var row_idx = obj.rowIndex - 1;
+			window.location.href = "../page-buyer/product-detail-flea-market.html?id=" + docList[row_idx].id;
 
 		}
 

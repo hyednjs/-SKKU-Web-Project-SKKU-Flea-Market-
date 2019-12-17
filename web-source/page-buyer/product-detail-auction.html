@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>SKKU Flea Market</title>
+	<link rel="icon" href="../img/Favicon.png" type="image/png">
+	<link rel="stylesheet" href="../vendors/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="../vendors/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="../vendors/themify-icons/themify-icons.css">
+	<link rel="stylesheet" href="../vendors/linericon/style.css">
+	<link rel="stylesheet" href="../vendors/nice-select/nice-select.css">
+	<link rel="stylesheet" href="../vendors/owl-carousel/owl.theme.default.min.css">
+	<link rel="stylesheet" href="../vendors/owl-carousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+	<!--================ Start Header Menu Area =================-->
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand logo_h" href="index.html"><img src="../img/logo.png" alt=""></a>
+					<h6>___for Buyer</h6>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="category.html">Product</a></li>
+							<li class="nav-item"><a class="nav-link" href="list.html">Product List</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+						</ul>
+
+						<ul class="nav-shop">
+							<li class="nav-item"><button><i class="ti-shopping-cart"></i><span
+										class="nav-shop__circle"></span></button> </li>
+							<li class="nav-item"><a class="button button-header" href="../login.html">Log out</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!--================ End Header Menu Area =================-->
+
+	<!-- ================ start banner area ================= -->
+	<section class="blog-banner-area" id="blog">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Product Details</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Product Details</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ================ end banner area ================= -->
+
+
+	<!--================Single Product Area =================-->
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<div class="owl-carousel owl-theme s_Product_carousel">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="../img/category/s-p1.jpg" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<div class="product-info">
+							<h3>Product Name : </h3>
+							<h3 id="item_name"></h3>
+						</div>
+						<div class="product-info">
+							<h4>Remain Time : </h4>
+							<h4 id="remain_time" style="color: red;"></h4>
+						</div>
+						<div class="product-info">
+							<h4>Current Price : </h4>
+							<h4 id="item_price"></h4>
+						</div>
+						<div class="product-info">
+							<h4>Product Name : </h4>
+							<h4 id="seller_name"></h4>
+						</div>
+						<div class="product-info">
+							<h4>Seller Phone Number : </h4>
+							<h4 id="phone_number"></h4>
+						</div>
+						<div class="product-info">
+							<h4>Trading Place : </h4>
+							<h4 id="trading_place"></h4>
+						</div>
+						<div>
+							<input type="text" id="new-price" name="new-price" placeholder="new price"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'new price'">
+							<button type="reset" onClick="clickBid()">BID!</button>
+						</div>
+					</div>
+					<div class="product_count">
+						<a class="button primary-btn" href="#">Add to Cart</a>
+						<a class="button primary-btn" href="#">Buy</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!--================End Single Product Area =================-->
+
+	<!--================ Start footer Area  =================-->
+	<footer>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row d-flex">
+					<p class="col-lg-12 footer-text text-center">
+						Copyright &copy;
+						<script>document.write(new Date().getFullYear());</script>
+						<i class="fa fa-heart" aria-hidden="true"></i> by Choi Ji Hye & Ju Hye Won
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--================ End footer Area  =================-->
+
+
+
+	<script src="../vendors/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../vendors/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="../vendors/skrollr.min.js"></script>
+	<script src="../vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="../vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="../vendors/jquery.ajaxchimp.min.js"></script>
+	<script src="../vendors/mail-script.js"></script>
+	<script src="../js/main.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-firestore.js"></script>
+
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyCfplFv26jJI7FF5jPWHaQE8fMtm0pSNSA",
+			authDomain: "skku-flea-market.firebaseapp.com",
+			projectId: "skku-flea-market",
+			appId: "1:496880200582:web:34045356203e3d8d1e5a07"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script>
+		function getURLParameter(name) {
+			return decodeURI(
+				(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]
+			);
+		}
+		function timeCounter(target_time) {
+			var countDownDate = new Date(target_time).getTime();
+
+			// Update the count down every 1 second
+			var x = setInterval(function () {
+
+				// Get today's date and time
+				var now = new Date().getTime();
+
+				// Find the distance between now and the count down date
+				var distance = countDownDate - now;
+
+				// Time calculations for days, hours, minutes and seconds
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				// Display the result in the element with id="demo"
+				document.getElementById("remain_time").innerHTML = days + "d " + hours + "h "
+					+ minutes + "m " + seconds + "s ";
+
+				// If the count down is finished, write some text
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("remain_time").innerHTML = "EXPIRED";
+				}
+			}, 1000);
+		}
+
+		var item_id = getURLParameter("id");
+		var db = firebase.firestore();
+		var docList = [];
+
+		db.collection("product").doc(item_id)
+			.get()
+			.then(function (doc) {
+				if (doc.exists) {
+					document.getElementById("item_name").textContent = doc.data().pname;
+					document.getElementById("remain_time").textContent = timeCounter(doc.data().remaintime);
+					document.getElementById("item_price").textContent = doc.data().price[doc.data().price.length - 1] + " won";
+					document.getElementById("seller_name").textContent = doc.data().seller;
+					document.getElementById("phone_number").textContent = doc.data().phonenum;
+					document.getElementById("trading_place").textContent = doc.data().tradingplace;
+				}
+				else {
+					alert("Fail to load item data.");
+				}
+			})
+
+		function clickBid() {
+			var new_price = parseInt(document.getElementById("new-price").value);
+			document.getElementById("new-price").value = ""
+			if (parseInt(document.getElementById("item_price").textContent) >= new_price) {
+				alert("Please enter a higher price.");
+				return;
+			}
+			document.getElementById("item_price").textContent = new_price;
+			db.collection("product").doc("Oq4KkZKXHP8Qd8CnOo4h")
+				.update({
+					price: firebase.firestore.FieldValue.arrayUnion(new_price)
+				});
+			alert("Success bid!")
+		}
+	</script>
+
+</body>
+
+</html>
