@@ -9,6 +9,9 @@ body {
   line-height: 1.667
 }
 
+.product-info{
+  display: flex;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -4369,7 +4372,8 @@ a {
 .product_count {
   display: inline-block;
   position: relative;
-  margin-bottom: 24px
+  margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .product_count label {
