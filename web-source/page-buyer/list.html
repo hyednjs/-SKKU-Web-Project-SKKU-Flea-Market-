@@ -201,14 +201,15 @@
 					td = clone.querySelectorAll("td");
 					//console.log(doc.data());
 					td[0].textContent = doc.data().pname;
-					td[1].textContent = doc.data().price;
+					td[1].textContent = doc.data().price[doc.data().price.length - 1];
 					td[2].textContent = doc.data().tradingplace;
 					td[3].textContent = doc.data().phonenum;
 					td[4].textContent = doc.data().status;
 					td[5].textContent = doc.data().seller;
 
-					var type = doc.data().type;
+					//var type = doc.data().type;
 
+					//console.log(type);
 					tb.appendChild(clone);
 				})
 			})
@@ -216,7 +217,18 @@
 		function clickRow(obj) {
 
 			var row_idx = obj.rowIndex - 1;
-			window.location.href = "../page-buyer/product-detail-flea-market.html?id=" + docList[row_idx].id;
+			console.log(docList[row_idx].data().type);
+
+
+			if (docList[row_idx].data().type == "fleamarket") {
+				window.location.href = "../page-buyer/product-detail-flea-market.html?id=" + docList[row_idx].id;
+
+			}
+			else if (docList[row_idx].data().type == "auction") {
+				window.location.href = "../page-buyer/product-detail-auction.html?id=" + docList[row_idx].id;
+
+			}
+
 		}
 		function search(obj) {
 			var table = document.getElementById("list");
