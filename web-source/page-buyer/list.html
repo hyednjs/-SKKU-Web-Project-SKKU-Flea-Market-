@@ -38,7 +38,6 @@
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="category.html">Product</a></li>
 							<li class="nav-item"><a class="nav-link" href="list.html">Product List</a></li>
 							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 						</ul>
@@ -201,7 +200,7 @@
 					td = clone.querySelectorAll("td");
 					//console.log(doc.data());
 					td[0].textContent = doc.data().pname;
-					td[1].textContent = doc.data().price[doc.data().price.length - 1];
+					td[1].textContent = doc.data().price;
 					td[2].textContent = doc.data().tradingplace;
 					td[3].textContent = doc.data().phonenum;
 					td[4].textContent = doc.data().status;
@@ -238,14 +237,8 @@
 			}
 
 			var docList = [];
-
-
 			var min = document.getElementById("min_price").value;
-
 			var max = document.getElementById("max_price").value;
-
-
-
 
 			db.collection("product")
 				.where("price", "<=", parseInt(max))

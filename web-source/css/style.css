@@ -2492,8 +2492,9 @@ a {
 .filter-bar {
   padding: 0px 20px 10px 20px;
   background: #f1f6f7;
-  margin-bottom: 30px
 }
+
+.filter-bar.d-flex.flex-wrap.align-items-center {}
 
 .filter-bar a, .filter-bar i {
   color: #000
@@ -2525,7 +2526,7 @@ a {
   border: 1px solid #eee;
   background: #fff;
   border-left: 0;
-  padding-right: 15px
+  padding: 5px;
 }
 
 .filter-bar-search button i, .filter-bar-search button span {

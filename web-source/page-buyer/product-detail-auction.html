@@ -35,7 +35,6 @@
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="category.html">Product</a></li>
 							<li class="nav-item"><a class="nav-link" href="list.html">Product List</a></li>
 							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 						</ul>
@@ -218,7 +217,7 @@
 				if (doc.exists) {
 					document.getElementById("item_name").textContent = doc.data().pname;
 					document.getElementById("remain_time").textContent = timeCounter(doc.data().remaintime);
-					document.getElementById("item_price").textContent = doc.data().price[doc.data().price.length - 1] + " won";
+					document.getElementById("item_price").textContent = doc.data().price + " won";
 					document.getElementById("seller_name").textContent = doc.data().seller;
 					document.getElementById("phone_number").textContent = doc.data().phonenum;
 					document.getElementById("trading_place").textContent = doc.data().tradingplace;
@@ -242,7 +241,7 @@
 			document.getElementById("item_price").textContent = new_price;
 			db.collection("product").doc(item_id)
 				.update({
-					price: firebase.firestore.FieldValue.arrayUnion(new_price),
+					price: new_price,
 					history: firebase.firestore.FieldValue.arrayUnion({ buyer_name: buyer, price: new_price })
 				});
 			alert("Success bid!")
