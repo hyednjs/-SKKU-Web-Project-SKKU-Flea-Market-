@@ -240,7 +240,7 @@
 				return;
 			}
 			document.getElementById("item_price").textContent = new_price;
-			db.collection("product").doc("Oq4KkZKXHP8Qd8CnOo4h")
+			db.collection("product").doc(item_id)
 				.update({
 					price: firebase.firestore.FieldValue.arrayUnion(new_price),
 					history: firebase.firestore.FieldValue.arrayUnion({ buyer_name: buyer, price: new_price })
