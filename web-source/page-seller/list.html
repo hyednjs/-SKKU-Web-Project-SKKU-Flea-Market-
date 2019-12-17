@@ -146,6 +146,7 @@
 		function historyPrint(obj) {
 			var len = obj.length;
 			var result = "";
+			if (len == 0) return result;
 			for (var i = 0; i < len; i++) {
 				result += obj[i].buyer_name + ": " + obj[i].price + "\n";
 			}
@@ -165,12 +166,17 @@
 					var clone = document.importNode(target.content, true);
 					var tb = document.querySelector("tbody");
 					td = clone.querySelectorAll("td");
-					//console.log(doc.data());
+					console.log(doc.data().history.length);
 					td[0].textContent = doc.data().pname;
 					td[1].textContent = doc.data().price;
-					td[2].textContent = doc.data().history[doc.data().history.length - 1].buyer_name;
+
+					if (doc.data().history.length == 0) td[2].textContent = "-"
+					else td[2].textContent = doc.data().history[doc.data().history.length - 1].buyer_name;
+
 					td[3].textContent = doc.data().status;
-					td[4].textContent = historyPrint(doc.data().history);
+
+					if (doc.data().history.length == 0) td[4].textContent = "-"
+					else td[4].textContent = historyPrint(doc.data().history);
 
 					//var type = doc.data().type;
 
@@ -184,61 +190,12 @@
 			var row_idx = obj.rowIndex - 1;
 			console.log(docList[row_idx].data().type);
 
-
 			if (docList[row_idx].data().type == "fleamarket") {
 				window.location.href = "../page-buyer/product-detail-flea-market.html?id=" + docList[row_idx].id;
-
 			}
 			else if (docList[row_idx].data().type == "auction") {
 				window.location.href = "../page-buyer/product-detail-auction.html?id=" + docList[row_idx].id;
-
 			}
-
-		}
-		function search(obj) {
-			var table = document.getElementById("list");
-			//or use :  var table = document.all.tableid;
-			for (var i = table.rows.length - 1; i > 0; i--) {
-				table.deleteRow(i);
-			}
-
-			var docList = [];
-
-
-			var min = document.getElementById("min_price").value;
-
-			var max = document.getElementById("max_price").value;
-
-
-
-
-			db.collection("product")
-				.where("price", "<=", parseInt(max))
-				.where("price", ">=", parseInt(min))
-				.orderBy("price")
-				.get()
-				.then(function (qs) {
-					docList = qs.docs;
-
-					qs.forEach(function (doc) {
-						var target = document.getElementById('list-row');
-						var clone = document.importNode(target.content, true);
-						var tb = document.querySelector("tbody");
-						td = clone.querySelectorAll("td");
-						console.log(doc.data().price);
-						td[0].textContent = doc.data().pname;
-						td[1].textContent = doc.data().price;
-						td[2].textContent = doc.data().tradingplace;
-						td[3].textContent = doc.data().phonenum;
-						td[4].textContent = doc.data().status;
-						td[5].textContent = doc.data().seller;
-
-						var type = doc.data().type;
-
-						tb.appendChild(clone);
-					})
-
-				})
 		}
 
 	</script>
