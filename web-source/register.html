@@ -74,10 +74,10 @@
 							<label for="buyer">Buyer</label>
 						</div>
 						<form class="row login_form" action="#/" id="register_form">
-							<div class="col-md-12 form-group">
+							<div class="col-md-12 form-group-dp">
 								<input type="text" class="form-control" id="name" name="name" placeholder="ID"
 									onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'">
-								<button type="button" onclick="checkid()">Duplicate</button>
+								<button type="button" onclick="checkId()">Duplicate</button>
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="text" class="form-control" id="email" name="email"
@@ -160,28 +160,32 @@
 	<script>
 
 		var db = firebase.firestore();
-		function checkid() {
+		function checkId() {
 
 			var usertype = null;
 			if (document.getElementById("seller").checked) usertype = "seller";
 			else if (document.getElementById("buyer").checked) usertype = "buyer";
 
 			var name = document.getElementById("name").value;
+			if (name == "") {
+				alert("Enter the ID");
+				return;
+			}
+
 			db.collection("user").where("user_id", "==", name).where("user_type", "==", usertype)
 				.get()
 				.then(function (qs) {
 					if (!qs.empty) {
 						qs.forEach(function (doc) {
-							alert("id already exists!");
+							alert("Id already exists!");
 							document.getElementById("name").value = "";
 						});
 					}
 					else {
-						alert("ok");
+						alert("You can use this ID");
 					}
 
 				})
-
 		}
 
 		function writeUserData() {
@@ -189,6 +193,10 @@
 			if (document.getElementById("seller").checked) usertype = "seller";
 			else if (document.getElementById("buyer").checked) usertype = "buyer";
 
+			if (usertype == null) {
+				alert("Please check the checkbox whethere seller or buyer.");
+				return;
+			}
 			//name, email, password, confirmPassword
 
 			var name = document.getElementById("name").value;
@@ -196,9 +204,13 @@
 			var password = document.getElementById("password").value;
 			var confirmPassword = document.getElementById("confirmPassword").value;
 
-			console.log(name, email, password, confirmPassword);
 			if (password != confirmPassword) {
-				alert("password is not equal to passwordconfirm");
+				alert("Please Check your Password.");
+				return;
+			}
+			else if (password == "" || name == "" || email == "") {
+				alert("Fill in the all blank.");
+				return;
 			}
 			else {
 				// Add a new document in collection "cities"
@@ -210,6 +222,7 @@
 				})
 					.then(function () {
 						console.log("Document successfully written!");
+						alert("Success to create your account!");
 					})
 					.catch(function (error) {
 						console.error("Error writing document: ", error);
