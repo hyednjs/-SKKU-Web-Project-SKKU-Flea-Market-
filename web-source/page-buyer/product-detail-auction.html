@@ -208,11 +208,11 @@
 			}, 1000);
 		}
 
-		// var item_id = getURLParameter("id");
+		var item_id = getURLParameter("id");
 		var db = firebase.firestore();
 		var docList = [];
 
-		db.collection("product").doc("Oq4KkZKXHP8Qd8CnOo4h")
+		db.collection("product").doc(item_id)
 			.get()
 			.then(function (doc) {
 				if (doc.exists) {
