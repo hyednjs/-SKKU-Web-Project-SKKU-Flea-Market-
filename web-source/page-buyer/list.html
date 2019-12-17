@@ -218,14 +218,16 @@
 			var row_idx = obj.rowIndex - 1;
 			console.log(docList[row_idx].data().type);
 
-
-			if (docList[row_idx].data().type == "fleamarket") {
-				window.location.href = "../page-buyer/product-detail-flea-market.html?id=" + docList[row_idx].id;
-
+			if (docList[row_idx].data().status == "sold") {
+				alert("Sorry, This product is sold out!");
 			}
-			else if (docList[row_idx].data().type == "auction") {
-				window.location.href = "../page-buyer/product-detail-auction.html?id=" + docList[row_idx].id;
-
+			else {
+				if (docList[row_idx].data().type == "fleamarket") {
+					window.location.href = "../page-buyer/product-detail-flea-market.html?id=" + docList[row_idx].id;
+				}
+				else if (docList[row_idx].data().type == "auction") {
+					window.location.href = "../page-buyer/product-detail-auction.html?id=" + docList[row_idx].id;
+				}
 			}
 
 		}

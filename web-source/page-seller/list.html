@@ -43,15 +43,12 @@
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 							<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="list.html">Product List</a></li>
+							<li class="nav-item"><a class="nav-link" href="list.html">Product Status</a></li>
 							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 						</ul>
 
 						<ul class="nav-shop">
-							<!--li class="nav-item"><button><i class="ti-search"></i></button></li-->
-							<li class="nav-item"><button><i class="ti-shopping-cart"></i><span
-										class="nav-shop__circle">3</span></button> </li>
-							<li class="nav-item"><a class="button button-header" href="#">Log out</a></li>
+							<li class="nav-item"><a class="button button-header" href="../login.html">Log out</a></li>
 						</ul>
 					</div>
 				</div>
@@ -59,6 +56,24 @@
 		</div>
 	</header>
 	<!--================ End Header Menu Area =================-->
+
+	<!-- ================ start banner area ================= -->
+	<section class="blog-banner-area" id="contact">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Product Status for Seller</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Product Status</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ================ end banner area ================= -->
 
 	<div class="limiter">
 
@@ -178,25 +193,9 @@
 					if (doc.data().history.length == 0) td[4].textContent = "-"
 					else td[4].textContent = historyPrint(doc.data().history);
 
-					//var type = doc.data().type;
-
-					// console.log(doc.data().history[0].buyer_name);
 					tb.appendChild(clone);
 				})
 			})
-
-		function clickRow(obj) {
-
-			var row_idx = obj.rowIndex - 1;
-			console.log(docList[row_idx].data().type);
-
-			if (docList[row_idx].data().type == "fleamarket") {
-				window.location.href = "../page-buyer/product-detail-flea-market.html?id=" + docList[row_idx].id;
-			}
-			else if (docList[row_idx].data().type == "auction") {
-				window.location.href = "../page-buyer/product-detail-auction.html?id=" + docList[row_idx].id;
-			}
-		}
 
 	</script>
 
