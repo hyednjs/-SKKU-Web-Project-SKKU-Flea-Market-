@@ -74,10 +74,8 @@
 		<div class="container">
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
-					<div class="owl-carousel owl-theme s_Product_carousel">
-						<div class="single-prd-item">
-							<img src="" class="img-fluid" id="item_img">
-						</div>
+					<div class="single-prd-item">
+						<img src="" id="item_img">
 					</div>
 				</div>
 				<div class=" flea-market-price">
@@ -173,7 +171,8 @@
 					document.getElementById("seller_name").textContent = doc.data().seller;
 					document.getElementById("phone_number").textContent = doc.data().phonenum;
 					document.getElementById("trading_place").textContent = doc.data().tradingplace;
-					// document.getElementById("item_img").src = doc.data().img_src;
+					document.getElementById("item_img").src = doc.data().img_src;
+					console.log(doc.data().img_src);
 				}
 				else {
 					alert("Fail to load item data.");

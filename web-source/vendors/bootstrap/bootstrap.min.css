@@ -199,7 +199,11 @@
     border-style: none;
     width: 300px
   }
-  
+  #item_img{
+    vertical-align: middle;
+    border-style: none;
+    width: initial
+  }
   svg {
     overflow: hidden;
     vertical-align: middle
