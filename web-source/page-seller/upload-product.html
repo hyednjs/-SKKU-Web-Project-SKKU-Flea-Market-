@@ -72,7 +72,7 @@
 
       <div class="row justify-content-center">
         <div class="col-md-4 col-lg-3 mb-4 mb-md-0">
-          <input id="upload-file" name="upload-file" type="file" style="display: none;">
+          <input id="upload-file" name="upload-file" type="file" style="display: none;" onchange="previewFile()">
           <div class="img-upload" id="img-upload">
             <p id="upload-text">Click here to browse your product image file.</p>
           </div>
@@ -161,10 +161,6 @@
       $('#upload-file').trigger('click');
     });
 
-    document.getElementById("upload-file").onchange = function () {
-      var filename = this.value.split(/(\\|\/)/g).pop();
-      document.getElementById("upload-text").innerHTML = filename;
-    }
 
     function checkOnlyOne(obj) {
       var chk = document.getElementById("flea-market");
@@ -202,6 +198,24 @@
   <script>
 
     var db = firebase.firestore();
+    var reader = new FileReader();
+
+    function previewFile() {
+      var file = document.querySelector('input[type=file]').files[0];
+
+      reader.addEventListener("load", function () {
+        $('#img-upload').css({
+          "background": "url(" + reader.result + ")",
+          "background-repeat": "no-repeat",
+          "background-position": "center center"
+        });
+        $("#upload-text").hide();
+      }, false);
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
 
     function writeProductData() {
 
@@ -214,13 +228,13 @@
       var remaintime = document.getElementById("remaintime").value;
       var type = null;
       var status = "selling";
+
       if (document.getElementById("auction").checked) {
         type = "auction";
       }
-
       else if (document.getElementById("flea-market").checked) type = "fleamarket";
 
-      if (pname == "" || phonenum == "" || price == "" || seller == "" || type == "") {
+      if (pname == "" || phonenum == "" || price == "" || seller == "" || type == "" || reader.result == null) {
         alert("Fill in the all blank.");
         return;
       }
@@ -234,9 +248,12 @@
           type: type,
           history: [],
           remaintime: firebase.firestore.Timestamp.fromDate(new Date(remaintime)),
-          status: status
+          status: status,
+          img_src: reader.result
         })
           .then(function () {
+            $('#img-upload').css({ "background": "white" });
+            $("#upload-text").show();
             alert("Success to create your account!");
           })
           .catch(function (error) {
@@ -244,6 +261,8 @@
           });
       }
     }
+
+
   </script>
 
   <!--===============================================================================================-->

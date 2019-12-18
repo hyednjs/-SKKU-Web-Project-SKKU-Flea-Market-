@@ -4755,7 +4755,9 @@ a {
 
 .footer-bottom {
   background: rgba(0, 35, 71, 0.980392);
-  padding: 32px
+  padding: 32px;
+  position: absolute;
+  bottom: 0;
 }
 
 .footer-bottom .footer-text {

@@ -86,7 +86,9 @@
     margin-top: 0;
     margin-bottom: 1rem
   }
-  
+  .flea-market-price{
+    margin: auto;
+  }
   abbr[data-original-title], abbr[title] {
     text-decoration: underline;
     -webkit-text-decoration: underline dotted;

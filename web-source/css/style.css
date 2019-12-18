@@ -4769,7 +4769,9 @@ a {
   font-size: 36px;
   font-weight: 600
 }
-
+.home-margin{
+  margin: 245px;
+}
 @media (max-width: 1199px) {
   .footer_title.large_title {
     font-size: 18px
@@ -4778,7 +4780,9 @@ a {
 
 .footer-bottom {
   background: rgba(0, 35, 71, 0.980392);
-  padding: 32px
+  padding: 32px;
+  bottom :0;
+  width: 100%;
 }
 
 .footer-bottom .footer-text {
