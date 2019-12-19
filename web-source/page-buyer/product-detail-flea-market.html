@@ -25,8 +25,9 @@
 				<div class="container">
 					<a class="navbar-brand logo_h" href="index.html"><img src="../img/logo.png" alt=""></a>
 					<h6>___for Buyer</h6>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -55,7 +56,7 @@
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
-					<h1>Product Details</h1>
+					<h1>Product Destails</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -73,11 +74,7 @@
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row s_product_inner">
-				<div class="col-lg-6">
-					<div class="single-prd-item">
-						<img src="" id="item_img">
-					</div>
-				</div>
+				<div class="col-lg-6"></div>
 				<div class=" flea-market-price">
 					<div class="s_product_text">
 						<div class="product-info">
@@ -171,8 +168,12 @@
 					document.getElementById("seller_name").textContent = doc.data().seller;
 					document.getElementById("phone_number").textContent = doc.data().phonenum;
 					document.getElementById("trading_place").textContent = doc.data().tradingplace;
-					document.getElementById("item_img").src = doc.data().img_src;
-					console.log(doc.data().img_src);
+					$('.col-lg-6').css({
+						"background": "url(" + doc.data().img_src + ")",
+						"background-repeat": "no-repeat",
+						"background-position": "center center",
+						"background-size": "contain"
+					});
 				}
 				else {
 					alert("Fail to load item data.");

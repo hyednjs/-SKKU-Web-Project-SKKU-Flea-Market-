@@ -87,7 +87,8 @@
     margin-bottom: 1rem
   }
   .flea-market-price{
-    margin: auto;
+    /* margin: auto; */
+    margin: 50px;
   }
   abbr[data-original-title], abbr[title] {
     text-decoration: underline;
@@ -587,6 +588,8 @@
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
+    /* margin: auto; */
+    margin-bottom: 20px;
   }
   
   .col {
